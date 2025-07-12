@@ -1,0 +1,31 @@
+name: Notificar cambios por correo
+ 
+on:
+  push:
+    branches:
+      - main
+      - feature_a
+      - feature_b
+ 
+jobs:
+  enviar_correo:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Determinar rama actual
+        id: branch
+        run: echo "BRANCH_NAME=${GITHUB_REF#refs/heads/}" >> $GITHUB_ENV
+ 
+      - name: Enviar correo
+        uses: dawidd6/action-send-mail@v3
+        with:
+          server_address: smtp.gmail.com
+          server_port: 587
+          username: ${{ secrets.EMAIL_USERNAME }}
+          password: ${{ secrets.EMAIL_PASSWORD }}
+          subject: Cambios subidos a rama ${{ env.BRANCH_NAME }}
+          body: |
+            Se han subido nuevos cambios a la rama ${{ env.BRANCH_NAME }}.
+            Puedes revisar el historial de commits en:
+            https://github.com/${{ github.repository }}/commits/${{ env.BRANCH_NAME }}
+            to: ${{ secrets.EMAIL_RECEIVER }}
+            from: GitHub Actions <${{ secrets.EMAIL_USERNAME }}>
