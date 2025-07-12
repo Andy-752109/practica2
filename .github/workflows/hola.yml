@@ -28,4 +28,5 @@ jobs:
             Puedes revisar el historial de commits en:
             https://github.com/${{ github.repository }}/commits/${{ env.BRANCH_NAME }}
             to: ${{ secrets.EMAIL_RECEIVER }}
-            from: GitHub Actions <${{ secrets.EMAIL_USERNAME }}>
+            from: GitHub Actions ${{ secrets.EMAIL_USERNAME }}
+
