@@ -27,6 +27,5 @@ jobs:
             Se han subido nuevos cambios a la rama ${{ env.BRANCH_NAME }}.
             Puedes revisar el historial de commits en:
             https://github.com/${{ github.repository }}/commits/${{ env.BRANCH_NAME }}
-            to: ${{ secrets.EMAIL_RECEIVER }}
-            from: GitHub Actions ${{ secrets.EMAIL_USERNAME }}
-
+          to: ${{ secrets.EMAIL_RECEIVER }}
+          from: "GitHub Actions <${{ secrets.EMAIL_USERNAME }}>"
